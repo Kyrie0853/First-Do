@@ -1,0 +1,19 @@
+//交换函数
+#include <stdio.h>
+#include <stdlib.h>
+void channum(int* x,int* y){
+    int numeber=0;
+    numeber=*x;
+    *x=*y;
+    *y=numeber;
+}
+int main()//运用举例
+{
+    int x=1;
+    int y=5;
+    channum(&x,&y);
+    printf("%d",x);
+    printf("%d",y);
+    
+    return 0;
+}
