@@ -1,0 +1,17 @@
+//求当前数组的元素个数（函数递归初级）
+#include <stdio.h>
+#include <stdlib.h>
+int leng(char*a){
+    if(*a=='\0'){
+         return 0;
+     }  
+     return 1+leng(a+1);
+}
+int main()
+{
+    char a[]="HELLO WORLD";
+    int num=leng(a);
+    printf("%d",num);
+    
+    return 0;
+}
