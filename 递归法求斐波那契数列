@@ -1,0 +1,20 @@
+//求斐波那契数列（递归初级）
+#include <stdio.h>
+#include <stdlib.h>
+int fib(int n){
+    if(n<=2){
+        return 1;
+    }else{
+        return fib(n-1)+fib(n-2);
+        
+    }
+}
+int main()
+{
+    int n;
+    printf("请输入 ");
+    scanf("%d",&n);
+    int a=fib(n);
+    printf("%d",a);
+    return 0;
+}
