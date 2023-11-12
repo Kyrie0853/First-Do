@@ -1,0 +1,21 @@
+//求n的阶乘(只能计算12以内的阶乘)
+#include <stdio.h>
+#include <stdlib.h>
+int jiecheng(int n){
+    int i;
+    int ret=1;
+    for(i=1;i<=n;i++){
+         ret*=i;
+        }
+        return ret;
+}
+int main()
+{
+    int n;
+    
+    printf("请输入 ");
+    scanf("%d",&n);
+    int ret=jiecheng(n);
+    printf("阶乘为%d",ret);
+    return 0;
+}
