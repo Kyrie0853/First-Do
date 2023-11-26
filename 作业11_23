@@ -1,0 +1,301 @@
+//#define _CRT_SECURE_NO_WARNINGS
+//#include <stdio.h>
+//#include <stdlib.h>
+//
+//double Lrd_Way(int n, double x) {
+//    if (n == 0) {
+//        return 1.0;
+//    }
+//    if (n == 1) {
+//        return x;
+//    }
+//    if (n >= 1) {
+//        double result = ((2 * n - 1) * x * Lrd_Way(n - 1, x) - (n - 1) * Lrd_Way(n - 2, x)) / n;
+//        return result;
+//    }
+//}
+//
+//int main() {
+//    double x;
+//    int n;
+//
+//    printf("请输入n的值和x的值，\n");
+//    scanf("%d %lf", &n, &x);
+//
+//    printf("计算结果如下：\n");
+//    Lrd_Way(n, x);
+//    printf("P=%lf\n", Lrd_Way(n, x));
+//
+//    return 0;
+//}
+//#define _CRT_SECURE_NO_WARNINGS
+//#include <stdio.h>
+//#include <stdlib.h>
+//
+//void studentpingjunfen(int scores[][5]) {
+//    for (int i = 0; i < 10; i++) {
+//        int sum = 0;
+//        for (int j = 0; j < 5; j++) {
+//            sum += scores[i][j];
+//        }
+//        double average = (double)sum / 5;
+//        printf("学生%d的平均分：%lf\n", i + 1, average);
+//    }
+//}
+//
+//void classpingjunfen(int scores[][5]) {
+//    for (int j = 0; j < 5; j++) {
+//        int sum = 0;
+//        for (int i = 0; i < 10; i++) {
+//            sum += scores[i][j];
+//        }
+//        double average = (double)sum / 10;
+//        printf("课程%d的平均分：%lf\n", j + 1, average);
+//    }
+//}
+//
+//void findMaxScore(int scores[][5]) {
+//    int maxScore = scores[0][0];
+//    int maxStudentIndex = 0;
+//    int maxCourseIndex = 0;
+//
+//    for (int i = 0; i < 10; i++) {
+//        for (int j = 0; j < 5; j++) {
+//            if (scores[i][j] > maxScore) {
+//                maxScore = scores[i][j];
+//                maxStudentIndex = i + 1;
+//                maxCourseIndex = j + 1;
+//            }
+//        }
+//    }
+//
+//    printf("最高分数：%d，对应学生：%d，对应课程：%d\n", maxScore, maxStudentIndex, maxCourseIndex);
+//}
+//
+//void fangcha(int scores[][5]) {
+//    double sum = 0;
+//
+//    for (int i = 0; i < 10; i++) {
+//        int studentSum = 0;
+//        for (int j = 0; j < 5; j++) {
+//            studentSum += scores[i][j];
+//        }
+//        double studentAverage = (double)studentSum / 5;
+//        sum += pow(studentAverage - studentSum, 2);
+//    }
+//
+//    double variance = sum / 10;
+//    printf("平均分方差：%lf\n", variance);
+//}
+//
+//
+//int main() {
+//    int scores[10][5];
+//
+//    printf("输入十个学生五门课的成绩：\n");
+//    for (int i = 0; i < 10; i++) {
+//        printf("学生 %d 的成绩：\n", i + 1);
+//        for (int j = 0; j < 5; j++) {
+//            scanf("%d", &scores[i][j]);
+//        }
+//    }
+//
+//    int choice;
+//    printf("请输入指令： \n1.计算每个学生的平均分\n2.计算每门课的平均分\n3.找出所有50个分数中最高的分数所对应的学生和课程\n4.计算平均分方差\n");
+//    scanf("%d", &choice);
+//
+//    switch (choice) {
+//    case 1:
+//        studentpingjunfen(scores);
+//        break;
+//    case 2:
+//        classpingjunfen(scores);
+//        break;
+//    case 3:
+//        findMaxScore(scores);
+//        break;
+//    case 4:
+//        fangcha(scores);
+//        break;
+//    default:
+//        printf("无效指令！\n");
+//        break;
+//    }
+//
+//    return 0;
+//}
+//#define _CRT_SECURE_NO_WARNINGS
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <string.h>
+//
+//typedef struct {
+//    char* name;
+//    int id;
+//} Employee;
+//
+//void inputEmployees(Employee* employees, int count) {
+//    printf("请输入%d个职工的姓名和职工号：\n", count);
+//    for (int i = 0; i < count; i++) {
+//        printf("第%d个职工的姓名: ", i + 1);
+//        char name[100];
+//        scanf("%s", name);
+//
+//        employees[i].name = malloc(strlen(name) + 1); 
+//        strcpy(employees[i].name, name);
+//
+//        printf("第%d个职工的职工号: ", i + 1);
+//        scanf("%d", &(employees[i].id));
+//    }
+//}
+//
+//void sortEmployees(Employee* employees, int count) {
+//    for (int i = 0; i < count - 1; i++) {
+//        for (int j = 0; j < count - i - 1; j++) {
+//            if (employees[j].id > employees[j + 1].id) {
+//                Employee temp;
+//                temp = employees[j];
+//                employees[j] = employees[j + 1];
+//                employees[j + 1] = temp;
+//            }
+//        }
+//    }
+//}
+//
+//char* findEmployee(Employee* employees, int count, int id) {
+//    int left = 0;
+//    int right = count - 1;
+//    while (left <= right) {
+//        int mid = (left + right) / 2;
+//        if (employees[mid].id == id) {
+//            return employees[mid].name;
+//        }
+//        else if (employees[mid].id < id) {
+//            left = mid + 1;
+//        }
+//        else {
+//            right = mid - 1;
+//        }
+//    }
+//    return NULL;
+//}
+//
+//void freeMemory(Employee* employees, int count) {
+//    for (int i = 0; i < count; i++) {
+//        free(employees[i].name);  
+//    }
+//}
+//
+//int main() {
+//    int count = 10;
+//    Employee* employees = malloc(count * sizeof(Employee)); 
+//    inputEmployees(employees, count);
+//
+//    sortEmployees(employees, count);
+//
+//    int id;
+//    printf("输入要查找的职工号: ");
+//    scanf("%d", &id);
+//
+//    char* name = findEmployee(employees, count, id);
+//    if (name != NULL) {
+//        printf("找到了！该职工号对应的职工姓名为：%s\n", name);
+//    }
+//    else {
+//        printf("未找到该职工号对应的职工姓名！\n");
+//    }
+//
+//    freeMemory(employees, count);
+//    free(employees); 
+//    return 0;
+//}
+#define _CRT_SECURE_NO_WARNINGS
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <string.h>
+//#include <math.h>
+//
+//int hanshu(char a[100]) {
+//	int b = 0;
+//	int len = strlen(a);
+//	for (int i = 0; i < len; i++) {
+//		int d;
+//		if (a[i] >= '0' && a[i] <= '9') {
+//			d = a[i] - '0';
+//		}
+//		else if (a[i] >= 'A' && a[i] <= 'F') {
+//			d = a[i] - 'A' + 10;
+//		}
+//		else if (a[i] >= 'a' && a[i] <= 'f') {
+//			d = a[i] - 'a' + 10;
+//		}
+//		else {
+//			printf("非法！请重新输入！\n");
+//			return -1;
+//		}
+//		b += d * pow(16, len - 1 - i);
+//	}
+//	return b;
+//}
+//
+//int main() {
+//	char a[100];
+//	printf("输入十六进制数：");
+//	scanf("%s", a);
+
+//	int result = hanshu(a);
+//	if (result != -1) {
+//		printf("对应的十进制数为：%d\n", result);
+//	}
+//	return 0;
+//}
+//#include <stdio.h>
+//#include <stdlib.h>
+//
+//void intToString(int n, char* str) {
+//    if (n == 0) {
+//        str[0] = '0';
+//        str[1] = '\0';
+//        return;
+//    }
+//
+//    if (n < 0) {
+//        n = -n;
+//        str[0] = '-';
+//        intToString(n, str + 1);
+//        return;
+//    }
+//
+//    if (n < 10) {
+//        str[0] = n + '0';
+//        str[1] = '\0';
+//        return;
+//    }
+//
+//    intToString(n / 10, str);
+//
+//    int length = 0;
+//    while (str[length] != '\0') {
+//        length++;
+//    }
+//
+//    str[length] = n % 10 + '0';
+//    str[length + 1] = '\0';
+//}
+//
+//int main() {
+//    int n;
+//    printf("输入一个整数：");
+//    scanf("%d", &n);
+//
+//    int maxLength = snprintf(NULL, 0, "%d", n) + 1;
+//    char* str = malloc(maxLength * sizeof(char));
+//
+//    intToString(n, str);
+//
+//    printf("转换后的字符串为：%s\n", str);
+//
+//    free(str);
+//
+//    return 0;
+//}
