@@ -1,0 +1,86 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+
+void rowEchelonForm(int rows, int cols, int** matrix) {
+    int lead = 0;
+    for (int r = 0; r < rows; r++) {
+        if (cols <= lead) {
+            return;
+        }
+
+        int i = r;
+        while (matrix[i][lead] == 0) {
+            i++;
+            if (rows == i) {
+                i = r;
+                lead++;
+                if (cols == lead) {
+                    return;
+                }
+            }
+        }
+
+        // 交换第i行与第r行
+        for (int j = 0; j < cols; j++) {
+            int temp = matrix[i][j];
+            matrix[i][j] = matrix[r][j];
+            matrix[r][j] = temp;
+        }
+
+        int div = matrix[r][lead];
+        if (div != 0) {
+            for (int j = 0; j < cols; j++) {
+                matrix[r][j] /= div;
+            }
+        }
+
+        for (int j = 0; j < rows; j++) {
+            if (j != r) {
+                int mult = matrix[j][lead];
+                for (int k = 0; k < cols; k++) {
+                    matrix[j][k] -= mult * matrix[r][k];
+                }
+            }
+        }
+        lead++;
+    }
+}
+
+int main() {
+    int rows, cols;
+    printf("请输入矩阵的行数和列数：");
+    scanf("%d %d", &rows, &cols);
+
+    // 动态分配内存
+    int** matrix = (int**)malloc(rows * sizeof(int*));
+    for (int i = 0; i < rows; i++) {
+        matrix[i] = (int*)malloc(cols * sizeof(int));
+    }
+
+    printf("请输入矩阵的元素：\n");
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            scanf("%d", &matrix[i][j]);
+        }
+    }
+
+    rowEchelonForm(rows, cols, matrix);
+
+    // 输出最简形矩阵
+    printf("最简形矩阵：\n");
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            printf("%d ", matrix[i][j]);
+        }
+        printf("\n");
+    }
+
+    // 释放动态分配的内存
+    for (int i = 0; i < rows; i++) {
+        free(matrix[i]);
+    }
+    free(matrix);
+
+    return 0;
+}
