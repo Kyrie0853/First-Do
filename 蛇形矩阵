@@ -1,0 +1,28 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <cstdio>
+using namespace std;
+int a[100][100];
+
+int main() {
+	int n, m;
+	cin >> n >> m;
+	int dx[] = { 0,1,0,-1 }, dy[] = { 1,0,-1,0 };//横纵坐标的偏移量
+	for (int x = 0, y = 0, d = 0, k = 1; k <= n * m; k++) {
+		a[x][y] = k;
+		int b = x + dx[d], c = y + dy[d];//横纵坐标的更新值
+		if (b < 0 || b >= n || c < 0 || c >= m || a[b][c]) {//b<0代表横坐标出左界，b>=0代表横坐标撞到右边界，c同理
+			//a【b】【c】表示遇到重复格子（因为已经赋值的格子不为零表达为真）
+			d = (d + 1) % 4;//一共有四个方向可以改变，分别定为0（上），1（右），2（下），3（左），当方向到三时转到0
+			b = x + dx[d], c = y + dy[d];//改变方向
+		}
+		x = b, y = c;
+	}
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			printf("%-2d ", a[i][j]);
+		}
+		printf("\n");
+	}
+	return 0;
+}
